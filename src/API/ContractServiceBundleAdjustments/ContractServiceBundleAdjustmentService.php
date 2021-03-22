@@ -42,6 +42,20 @@ class ContractServiceBundleAdjustmentService
     }
 
     /**
+     * Finds the ContractServiceBundleAdjustment based on its ID.
+     *
+     * @param  string $id  ID of the entity to be retrieved.
+     *
+     * @author Jonathan Halls <jonathan.halls@atws.ca>
+     */
+    public function findById(int $id): ContractServiceBundleAdjustmentEntity
+    {
+        return ContractServiceBundleAdjustmentEntity::fromResponse(
+            $this->client->get("ContractServiceBundleAdjustments/$id")
+        );
+    }
+
+    /**
      * Returns information about what fields an entity has.
      *
      * @see EntityFieldCollection
@@ -67,5 +81,29 @@ class ContractServiceBundleAdjustmentService
         return EntityInformationEntity::fromResponse(
             $this->client->get("ContractServiceBundleAdjustments/entityInformation")
         );
+    }
+
+    /**
+     * Returns an instance of the query builder for this entity.
+     *
+     * @see ContractServiceBundleAdjustmentQueryBuilder The query builder class.
+     *
+     * @author Jonathan Halls <jonathan.halls@atws.ca>
+     */
+    public function query(): ContractServiceBundleAdjustmentQueryBuilder
+    {
+        return new ContractServiceBundleAdjustmentQueryBuilder($this->client);
+    }
+
+    /**
+     * Updates the contract.
+     *
+     * @param  ContractServiceBundleAdjustmentEntity  $resource  The contract entity to be updated.
+     *
+     * @author Jonathan Halls <jonathan.halls@atws.ca>
+     */
+    public function update(ContractServiceBundleAdjustmentEntity $resource): Response
+    {
+        return $this->client->put("ContractServiceBundleAdjustments", $resource->toArray());
     }
 }
